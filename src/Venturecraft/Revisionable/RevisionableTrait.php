@@ -89,7 +89,7 @@ trait RevisionableTrait
      * @return mixed
      */
     public function revisionHistory()
-    {'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
+    {
         return $this->morphMany('\Venturecraft\Revisionable\Revision', 'revisionable');
     }
 
