@@ -105,7 +105,6 @@ trait RevisionableTrait
         return \Venturecraft\Revisionable\Revision::where('revisionable_type', get_called_class())
             ->orderBy('updated_at', $order)->limit($limit)->get();
     }
-'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
     /**
     * Invoked before a model is saved. Return false to abort the operation.
     *
