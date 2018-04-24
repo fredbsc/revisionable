@@ -89,7 +89,7 @@ trait RevisionableTrait
      * @return mixed
      */
     public function revisionHistory()
-    {
+    {'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
         return $this->morphMany('\Venturecraft\Revisionable\Revision', 'revisionable');
     }
 
@@ -105,7 +105,7 @@ trait RevisionableTrait
         return \Venturecraft\Revisionable\Revision::where('revisionable_type', get_called_class())
             ->orderBy('updated_at', $order)->limit($limit)->get();
     }
-
+'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
     /**
     * Invoked before a model is saved. Return false to abort the operation.
     *
@@ -182,6 +182,7 @@ trait RevisionableTrait
                     'old_value' => array_get($this->originalData, $key),
                     'new_value' => $this->updatedData[$key],
                     'user_id' => $this->getSystemUserId(),
+                    'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
                     'created_at' => new \DateTime(),
                     'updated_at' => new \DateTime(),
                 );
@@ -224,6 +225,7 @@ trait RevisionableTrait
                 'old_value' => null,
                 'new_value' => $this->{self::CREATED_AT},
                 'user_id' => $this->getSystemUserId(),
+                'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
                 'created_at' => new \DateTime(),
                 'updated_at' => new \DateTime(),
             );
@@ -251,6 +253,7 @@ trait RevisionableTrait
                 'old_value' => null,
                 'new_value' => $this->{$this->getDeletedAtColumn()},
                 'user_id' => $this->getSystemUserId(),
+                'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
                 'created_at' => new \DateTime(),
                 'updated_at' => new \DateTime(),
             );
