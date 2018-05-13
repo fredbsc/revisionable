@@ -395,14 +395,13 @@ class Revisionable extends Eloquent
     private function getRemoteIP()
     {
       
-            if(array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER))
-                return $_SERVER['HTTP_X_FORWARDED_FOR'];
+				if(array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER))
+						return $_SERVER['HTTP_X_FORWARDED_FOR'];
 
-            if(array_key_exists('REMOTE_ADDR', $_SERVER))
-                return $_SERVER['REMOTE_ADDR'];
+				if(array_key_exists('REMOTE_ADDR', $_SERVER))
+						return $_SERVER['REMOTE_ADDR'];
 
-            return '0.0.0.0';
+				return '0.0.0.0';
 
-            }
     }
 }
