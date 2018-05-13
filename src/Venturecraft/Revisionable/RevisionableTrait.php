@@ -181,7 +181,7 @@ trait RevisionableTrait
                     'old_value' => array_get($this->originalData, $key),
                     'new_value' => $this->updatedData[$key],
                     'user_id' => $this->getSystemUserId(),
-                    'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
+                    'ip' => $this->getRemoteIP();
                     'created_at' => new \DateTime(),
                     'updated_at' => new \DateTime(),
                 );
@@ -224,7 +224,7 @@ trait RevisionableTrait
                 'old_value' => null,
                 'new_value' => $this->{self::CREATED_AT},
                 'user_id' => $this->getSystemUserId(),
-                'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
+								'ip' => $this->getRemoteIP();
                 'created_at' => new \DateTime(),
                 'updated_at' => new \DateTime(),
             );
@@ -252,7 +252,7 @@ trait RevisionableTrait
                 'old_value' => null,
                 'new_value' => $this->{$this->getDeletedAtColumn()},
                 'user_id' => $this->getSystemUserId(),
-                'ip' => array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0',
+								'ip' => $this->getRemoteIP();
                 'created_at' => new \DateTime(),
                 'updated_at' => new \DateTime(),
             );
@@ -437,4 +437,19 @@ trait RevisionableTrait
             unset($donts);
         }
     }
+
+		private function getRemoteIP()
+		{
+			
+						if(array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER))
+								return $_SERVER['HTTP_X_FORWARDED_FOR'];
+
+						if(array_key_exists('REMOTE_ADDR', $_SERVER))
+							  return $_SERVER['REMOTE_ADDR'];
+
+						return '0.0.0.0';
+
+						}
+		}
+
 }
